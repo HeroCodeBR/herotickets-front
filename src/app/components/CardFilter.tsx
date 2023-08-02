@@ -1,11 +1,18 @@
 import { Button } from './Form/Button';
 
-export const CardFilter = () => {
+export const CardFilter = ({ event }: any) => {
+  const image = `http://localhost:3333/uploads/${event.banner}`;
+  const date = new Date(event.date);
+  const address = event?.formattedAddress?.split('-');
+  console.log('🚀 ~ file: CardFilter.tsx:7 ~ CardFilter ~ address:', address);
   return (
     <div className="rounded mb-6 ">
-      <div className="w-full p-3 h-[150px] relative bg-black bg-opacity-25 rounded-3xl rounded-b-none shadow">
+      <div
+        className="w-full p-3 h-[150px] relative  rounded-3xl rounded-b-none  bg-cover bg-center"
+        style={{ backgroundImage: `url(${image})` }}
+      >
         <div className=" text-white absolute top-3">
-          <p className="text-normal pb-1 font-bold">Jorge e Mateus</p>
+          <p className="text-normal pb-1 font-bold">{event.title}</p>
           <div className="flex">
             <div className="mr-4 flex">
               <svg
@@ -22,7 +29,9 @@ export const CardFilter = () => {
                   d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"
                 />
               </svg>
-              <p>08/07/2023</p>
+              <p>
+                {date.getDate()}/{date.getMonth() + 1}/{date.getFullYear()}
+              </p>
             </div>
 
             <div className="mr-4 flex">
@@ -41,7 +50,7 @@ export const CardFilter = () => {
                 />
               </svg>
 
-              <p>14h</p>
+              <p>{date.getHours()}h</p>
             </div>
           </div>
         </div>
@@ -68,17 +77,13 @@ export const CardFilter = () => {
                 />
               </svg>
 
-              <p>Mineirão - Belo Horizonte</p>
+              <p>{address ? address[1] : ''}</p>
             </div>
           </div>
         </div>
       </div>
-      <div className="w-full p-3  relative bg-slate-200 rounded-3xl rounded-t-none shadow">
-        <p className="text-sm text-black">
-          Venha conhecer aprender o básico da programação numa oficina realizada
-          pela coordenação do curso de Ciência da Computação da UFMG, uma das
-          faculdades mais renomadas do país!
-        </p>
+      <div className="w-full p-3  relative bg-slate-200 rounded-3xl rounded-t-none ">
+        <p className="text-sm text-black">{event.description}</p>
         <div className="flex justify-center w-2/5 mx-auto my-4">
           <Button title="Ver Detalhes do Evento" />
         </div>

@@ -1,10 +1,33 @@
+'use client';
 import { CardFilter } from '@/app/components/CardFilter';
 import { Button } from '@/app/components/Form/Button';
 import { Input } from '@/app/components/Form/Input';
 import { InputRange } from '@/app/components/Form/InputRange';
 import { categories } from '@/app/utils/categories';
+import { fetchWrapper } from '@/app/utils/fetchWrapper';
+import { useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export default function FilterEvents() {
+  const searchParams = useSearchParams();
+  const [events, setEvents] = useState([]);
+
+  const getEvents = async (data: any) => {
+    const response = await fetchWrapper(
+      `/events/filter?` +
+        new URLSearchParams({
+          name: data.name,
+        }),
+      { method: 'GET' },
+    );
+    setEvents(response);
+    console.log('🚀 ~ file: page.tsx:25 ~ getEvents ~ response:', response);
+  };
+  useEffect(() => {
+    if (searchParams.get('q')) {
+      getEvents({ name: searchParams.get('q') });
+    }
+  }, [searchParams.get('q')]);
   return (
     <div className="container m-auto">
       <div className="grid md:grid-cols-2 gap-1 grid-cols-1 p-8">
@@ -43,8 +66,10 @@ export default function FilterEvents() {
                 className="w-full px-6 py-[5px] bg-white rounded-lg border border-teal-400 "
               >
                 <option value="">Selecione </option>
-                {categories.map((category) => (
-                  <option value={category.name}>{category.name}</option>
+                {categories.map((category, index) => (
+                  <option key={index} value={category.name}>
+                    {category.name}
+                  </option>
                 ))}
               </select>
             </div>
@@ -65,10 +90,9 @@ export default function FilterEvents() {
           <p className=" text-blue text-base font-light">
             Crie o seu próprio evento da maneira que você preferir! :)
           </p>
-          <CardFilter />
-          <CardFilter />
-          <CardFilter />
-          <CardFilter />
+          {events.map((event, index) => {
+            return <CardFilter event={event} key={index} />;
+          })}
         </div>
       </div>
     </div>

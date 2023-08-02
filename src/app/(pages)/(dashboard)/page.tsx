@@ -1,11 +1,17 @@
 import { BannerPrimary } from '@/app/components/BannerPrimary';
 import { BannerSecondary } from '@/app/components/BannerSecondary';
 import { categories } from '@/app/utils/categories';
+import { fetchWrapper } from '@/app/utils/fetchWrapper';
 
-export default function Dashboard() {
+export default async function Dashboard() {
+  const response = await fetchWrapper('/events/main', {
+    method: 'GET',
+  });
+  console.log('🚀 ~ file: page.tsx:10 ~ Dashboard ~ response:', response);
+  const secondareResponse = response.slice(1);
   return (
     <div className="container mx-auto">
-      <BannerPrimary />
+      <BannerPrimary events={response[0]} />
       <div className="p-2 text-blue ">
         <p className="text-2xl font-medium">Eventos em Destaque</p>
         <p className="text-base font-light">
@@ -13,9 +19,9 @@ export default function Dashboard() {
         </p>
       </div>
       <div className="grid grid-cols-3 gap-4 mb-4">
-        <BannerSecondary />
-        <BannerSecondary />
-        <BannerSecondary />
+        {secondareResponse.map((event: any) => (
+          <BannerSecondary event={event} />
+        ))}
       </div>
       <div className="p-2 text-blue ">
         <p className="text-2xl font-medium">Navegue por tipo de evento</p>
