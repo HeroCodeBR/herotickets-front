@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 export const Navbar = () => {
   const [search, setSearch] = useState('');
-  console.log('🚀 ~ file: Navbar.tsx:7 ~ Navbar ~ search:', search);
   const router = useRouter();
   const handleSubmit = () => {
     const queryString = encodeURIComponent(search);

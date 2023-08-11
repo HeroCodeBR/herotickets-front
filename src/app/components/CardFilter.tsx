@@ -1,10 +1,10 @@
+import Link from 'next/link';
 import { Button } from './Form/Button';
 
 export const CardFilter = ({ event }: any) => {
   const image = `http://localhost:3333/uploads/${event.banner}`;
   const date = new Date(event.date);
   const address = event?.formattedAddress?.split('-');
-  console.log('🚀 ~ file: CardFilter.tsx:7 ~ CardFilter ~ address:', address);
   return (
     <div className="rounded mb-6 ">
       <div
@@ -85,7 +85,9 @@ export const CardFilter = ({ event }: any) => {
       <div className="w-full p-3  relative bg-slate-200 rounded-3xl rounded-t-none ">
         <p className="text-sm text-black">{event.description}</p>
         <div className="flex justify-center w-2/5 mx-auto my-4">
-          <Button title="Ver Detalhes do Evento" />
+          <Link href={`/event-details/${event._id}`}>
+            <Button title="Ver Detalhes do Evento" />
+          </Link>
         </div>
       </div>
     </div>

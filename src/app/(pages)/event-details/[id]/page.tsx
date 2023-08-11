@@ -1,14 +1,18 @@
-export const BannerPrimary = ({ events }: any) => {
-  const image = `http://localhost:3333/uploads/${events.banner}`;
-  const date = new Date(events.date);
+import { FormWrapper } from '@/app/components/FormWrapper';
+
+export default function EventDetailsPage({
+  params,
+}: {
+  params: { id: string };
+}) {
   return (
-    <div className="rounded p-5">
+    <div>
       <div
-        className="w-full h-[280px] relative  rounded-3xl shadow bg-cover bg-center"
-        style={{ backgroundImage: `url(${image})` }}
+        className="w-full h-[280px] relative bg-black   shadow bg-cover bg-center"
+        // style={{ backgroundImage: `url(${image})` }}
       >
         <div className="p-5 text-white absolute bottom-0">
-          <h3 className="text-5xl pb-4 font-bold">{events.title}</h3>
+          <h3 className="text-5xl pb-4 font-bold">fgfdgh</h3>
           <div className="flex">
             <div className="mr-4 flex">
               <svg
@@ -25,9 +29,7 @@ export const BannerPrimary = ({ events }: any) => {
                   d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"
                 />
               </svg>
-              <p>
-                {date.getDate()}/{date.getMonth() + 1}/{date.getFullYear()}
-              </p>
+              <p>fghfg</p>
             </div>
             <div className="mr-4 flex">
               <svg
@@ -50,7 +52,7 @@ export const BannerPrimary = ({ events }: any) => {
                 />
               </svg>
 
-              <p>{events.formattedAddress}</p>
+              <p>dfgdfg</p>
             </div>
             <div className="mr-4 flex">
               <svg
@@ -68,11 +70,19 @@ export const BannerPrimary = ({ events }: any) => {
                 />
               </svg>
 
-              <p>{date.getHours()}h </p>
+              <p>h </p>
             </div>
           </div>
         </div>
       </div>
+      <div className="grid grid-cols-2 gap-2 text-blue p-4 mr-14">
+        <div>
+          <p>desasdfasdf</p>
+        </div>
+        <div>
+          <FormWrapper />
+        </div>
+      </div>
     </div>
   );
-};
+}

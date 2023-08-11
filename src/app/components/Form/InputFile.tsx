@@ -1,14 +1,15 @@
 'use client';
 
 import { ChangeEvent, useState } from 'react';
+interface IImageProps {
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+}
 
-export const InputFile = () => {
-  const [file, setFile] = useState<File | null>(null);
+export const InputFile = ({ onChange }: IImageProps) => {
   const [preview, setPreview] = useState<String>('');
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const image = e.target.files?.[0] || null;
 
-    setFile(image);
     if (image) {
       const reader = new FileReader();
       reader.onloadend = (e) => {
@@ -17,11 +18,12 @@ export const InputFile = () => {
         setPreview(base64String as string);
       };
       reader.readAsDataURL(image);
+      onChange(image);
     }
   };
   return (
     <>
-      {file ? (
+      {preview ? (
         <div
           className="w-full h-full cursor-pointer bg-cover bg-center rounded-3xl"
           style={{ backgroundImage: `url(${preview})` }}

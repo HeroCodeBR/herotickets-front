@@ -34,6 +34,11 @@ const categories = [
     icon: '/musical.png',
     route: 'musical',
   },
+  {
+    name: 'Show',
+    icon: '/musical.png',
+    route: 'musical',
+  },
 ];
 
 export { categories };
