@@ -17,7 +17,7 @@ const containerStyle = {
 export const MapContainer = () => {
   const [center, setCenter] = useState({ lat: -3.745, lng: -38.523 });
   const [markers, setMarkers] = useState([]);
-  const [selectedMarker, setSelectedMarker] = useState(null);
+  const [selectedMarker, setSelectedMarker] = useState<any>(null);
 
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
   if (!apiKey) throw new Error('API KEY NOT FOUND');
@@ -53,7 +53,7 @@ export const MapContainer = () => {
 
   return isLoaded ? (
     <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={10}>
-      {markers.map((marker, index) => (
+      {markers.map((marker: any, index) => (
         <Marker
           key={index}
           position={{

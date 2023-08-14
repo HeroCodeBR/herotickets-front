@@ -1,18 +1,25 @@
 import { FormWrapper } from '@/app/components/FormWrapper';
+import { fetchWrapper } from '@/app/utils/fetchWrapper';
 
-export default function EventDetailsPage({
+export default async function EventDetailsPage({
   params,
 }: {
   params: { id: string };
 }) {
+  const response = await fetchWrapper(`/events/${params.id}`, {
+    method: 'GET',
+  });
+  const image = `http://localhost:3333/uploads/${response.banner}`;
+  const date = new Date(response.date);
+  console.log('🚀 ~ file: p age.tsx:11 ~ response:', response);
   return (
     <div>
       <div
-        className="w-full h-[280px] relative bg-black   shadow bg-cover bg-center"
-        // style={{ backgroundImage: `url(${image})` }}
+        className="w-full h-[280px] relative   shadow bg-cover bg-center"
+        style={{ backgroundImage: `url(${image})` }}
       >
         <div className="p-5 text-white absolute bottom-0">
-          <h3 className="text-5xl pb-4 font-bold">fgfdgh</h3>
+          <h3 className="text-5xl pb-4 font-bold">{response.title}</h3>
           <div className="flex">
             <div className="mr-4 flex">
               <svg
@@ -29,7 +36,10 @@ export default function EventDetailsPage({
                   d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"
                 />
               </svg>
-              <p>fghfg</p>
+              <p>
+                {' '}
+                {date.getDate()}/{date.getMonth() + 1}/{date.getFullYear()}
+              </p>
             </div>
             <div className="mr-4 flex">
               <svg
@@ -52,7 +62,7 @@ export default function EventDetailsPage({
                 />
               </svg>
 
-              <p>dfgdfg</p>
+              <p>{response.formattedAddress}</p>
             </div>
             <div className="mr-4 flex">
               <svg
@@ -70,17 +80,17 @@ export default function EventDetailsPage({
                 />
               </svg>
 
-              <p>h </p>
+              <p>{date.getHours()}h </p>
             </div>
           </div>
         </div>
       </div>
       <div className="grid grid-cols-2 gap-2 text-blue p-4 mr-14">
         <div>
-          <p>desasdfasdf</p>
+          <p>{response.description}</p>
         </div>
         <div>
-          <FormWrapper />
+          <FormWrapper response={response} />
         </div>
       </div>
     </div>

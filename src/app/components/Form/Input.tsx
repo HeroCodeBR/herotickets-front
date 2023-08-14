@@ -19,7 +19,7 @@ export const InputBase: ForwardRefRenderFunction<
           className={`w-full px-6 py-[5px] bg-white rounded-lg border border-teal-400  `}
           placeholder={placeholder}
           ref={ref}
-          {...rest}
+          // {...rest}
           rows={5}
         />
       </div>

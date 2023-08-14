@@ -9,7 +9,7 @@ const AutoComplete = ({ onSelect }: IAutoCompleteProps) => {
   const [suggestions, setSuggestions] = useState([]);
   const [inputValue, setInputValue] = useState('');
 
-  const handleChangeInput = async (value) => {
+  const handleChangeInput = async (value: any) => {
     setInputValue(value);
     const fetchSuggestions = await fetch(`/api?input=${value}`, {
       method: 'GET',
@@ -18,7 +18,7 @@ const AutoComplete = ({ onSelect }: IAutoCompleteProps) => {
 
     setSuggestions(data.predictions);
   };
-  const handleSelect = async (address) => {
+  const handleSelect = async (address: any) => {
     setInputValue(address.description);
     setSuggestions([]);
     try {

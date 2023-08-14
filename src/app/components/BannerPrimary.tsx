@@ -1,8 +1,15 @@
+'use client';
+import { useRouter } from 'next/navigation';
+
 export const BannerPrimary = ({ events }: any) => {
   const image = `http://localhost:3333/uploads/${events.banner}`;
   const date = new Date(events.date);
+  const router = useRouter();
+  const handleRedirectEvent = () => {
+    router.push(`/event-details/${events._id}`);
+  };
   return (
-    <div className="rounded p-5">
+    <div className="rounded p-5 cursor-pointer" onClick={handleRedirectEvent}>
       <div
         className="w-full h-[280px] relative  rounded-3xl shadow bg-cover bg-center"
         style={{ backgroundImage: `url(${image})` }}

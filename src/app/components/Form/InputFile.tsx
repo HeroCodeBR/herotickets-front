@@ -8,7 +8,7 @@ interface IImageProps {
 export const InputFile = ({ onChange }: IImageProps) => {
   const [preview, setPreview] = useState<String>('');
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const image = e.target.files?.[0] || null;
+    const image: any = e.target.files?.[0] || null;
 
     if (image) {
       const reader = new FileReader();

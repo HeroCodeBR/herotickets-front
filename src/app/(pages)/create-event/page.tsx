@@ -63,7 +63,7 @@ export default function CreateEvent() {
       console.log('🚀 ~ file: page.tsx:48 ~ onSubmit ~ error:', error);
     }
   };
-  const handleFileChange = (name: any, file: File) => {
+  const handleFileChange = (name: any, file: any) => {
     if (name === 'flyers') {
       setFlyers([...flyers, file]);
     } else {
