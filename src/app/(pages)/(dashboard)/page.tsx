@@ -8,7 +8,9 @@ export default async function Dashboard() {
     method: 'GET',
   });
   console.log('🚀 ~ file: page.tsx:10 ~ Dashboard ~ response:', response);
-  const secondareResponse = response.slice(1);
+  if (response) {
+    var secondareResponse = response.slice(1);
+  }
   return (
     <div className="container mx-auto">
       <BannerPrimary events={response[0]} />
